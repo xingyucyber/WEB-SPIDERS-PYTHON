@@ -1,0 +1,18 @@
+from urllib import request      #make sure you have module request downloaded
+
+
+goog_url = "http://real-chart.finance.yahoo.com/table.csv?s=GOOG&d=0&e=3&f=2016&g=d&a=2&b=27&c=2014&ignore=.csv"   #csv url examples
+yahoo_url = 'http://real-chart.finance.yahoo.com/table.csv?s=YHOO&d=1&e=1&f=2016&g=d&a=3&b=12&c=1996&ignore=.csv'
+amz_url = 'http://real-chart.finance.yahoo.com/table.csv?s=AMZN&d=1&e=3&f=2016&g=d&a=4&b=16&c=1997&ignore=.csv'     #go to yahoo finace, go to historical price than copy the stock csv file from the properties
+def creeper(csv_url):
+    response = request.urlopen(csv_url)
+    csv = response.read()
+    csv_str = str(csv)
+    lines = csv_str.split('\\n')
+    spider_url = r'amz.csv' #naming the file
+    fx = open(spider_url,'w')
+    for line in lines:
+        fx.write(line + '\n')
+    fx.close()
+
+creeper(amz_url) #downloading the csv file
